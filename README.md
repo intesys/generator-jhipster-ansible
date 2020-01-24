@@ -2,11 +2,13 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][github-actions-image]][github-actions-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-> JHipster module, A Jhipster module to generate an Ansible deployment workspace
+> A Jhipster module to generate an [Ansible](https://www.ansible.com/) deployment workspace.
 
 # Introduction
 
 This is a [JHipster](https://www.jhipster.tech/) module, that is meant to be used in a JHipster application.
+
+This module will generate all the files to deploy you Jhipster jar in your multi stage environment via Ansible.
 
 # Prerequisites
 
@@ -45,6 +47,20 @@ yarn global upgrade generator-jhipster-ansible
 ```
 
 # Usage
+
+In your jhipster workspace:
+```bash
+yo jhipster-ansible
+? *Ansible Directory*: Enter the ansible workspace directory ./ansible
+? *Maven*: what is the URL of distributionManagement for snapshots ? http://artifactory:8081/artifactory/libs-snapshot
+? *Maven*: what is the URL of distributionManagement for releases ? http://artifactory:8081/artifactory/libs-release
+? *Enviroments*: which enviroments do you want to deploy to (comma separated) ? test,staging,prod
+? *SSH User*: 'what is the ssh user you will use to deploy (not mandatory)) ? myuser
+```
+
+# Dependencies
+
+- https://github.com/orachide/ansible-role-springboot
 
 # License
 
