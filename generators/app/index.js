@@ -121,7 +121,7 @@ module.exports = class extends BaseGenerator {
         this.template('hosts/shared-vars.yml', `${this.ansibleWorkspacePath}/hosts/shared-vars.yml`);
         this.template('requirements.yml', `${this.ansibleWorkspacePath}/requirements.yml`);
         this.template('ansible.cfg', `${this.ansibleWorkspacePath}/ansible.cfg`);
-        this.copy('.gitignore', `${this.ansibleWorkspacePath}/.gitignore`);
+        this.copy('gitignore-tpl', `${this.ansibleWorkspacePath}/.gitignore`);
         this.template(
             'ansible-templates/logback-spring.xml.j2',
             `${this.ansibleWorkspacePath}/templates/${this.appName}/logback-spring.xml.j2`
