@@ -1,0 +1,8 @@
+# Variables shared between enviroments.
+---
+maven_snapshots_repo: <%= mavenSnapshotsUrl %>
+maven_releases_repo: <%= mavenReleasesUrl %>
+
+maven_repository_url: "{{maven_snapshots_repo}}"
+maven_user: "{{vault_maven_user}}"
+maven_password: "{{vault_maven_password}}"

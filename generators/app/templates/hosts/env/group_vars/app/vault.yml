@@ -1,0 +1,6 @@
+# Secret variables of the <%= deployEnv %> environment of application <%= appName %>. This file MUST be encrypted using ansible vault.
+---
+<%= snakeCaseAppName %>:
+<% inventoryVaults.forEach(function(inventoryVault){ %>
+    <%- inventoryVault %>
+<% }); %>

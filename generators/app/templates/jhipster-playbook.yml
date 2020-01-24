@@ -1,0 +1,58 @@
+---
+- name: Install jhipster <%= appName %> app
+  hosts: <%= appName %>
+  become: true
+  vars_files:
+    - hosts/shared-secrets.yml
+    - hosts/shared-vars.yml
+
+  roles:
+    - role: orachide.springboot-service
+      vars:
+        # server config (user and directories)
+        sb_app_as_a_service: true
+        sb_app_create_users: false
+        sb_app_user: jhipster
+        sb_app_user_group: jhipster
+        
+        # app configuration files
+        sb_app_name: <%= appName %>
+        sb_applications_root_folder: /opt/jhipster/<%= appName %>
+        sb_app_config_file_template_path: "{{ playbook_dir }}/templates/<%= appName %>/application-prod.yml.j2"
+        sb_app_logback_file_template_path: "{{ playbook_dir }}/templates/<%= appName %>/logback-spring.xml.j2"
+        
+        # java configs
+        sb_app_install_java: false
+        sb_app_service_java_home: /usr/bin/java
+        sb_app_java_opts_xms: 256M
+        sb_app_java_opts_xmx: 1024M
+        sb_app_java_opts_others: >- 
+          -Djava.security.egd=file:/dev/./urandom 
+          -Dspring.profiles.active=prod,swagger
+
+        # maven configs
+        sb_app_group_id: <%= packageName %>
+        sb_app_artifact_id: <%= appName %>
+        sb_app_version: 0.1.0-SNAPSHOT
+        sb_app_extension: jar
+        sb_maven_repository_url: "{{maven_repository_url}}"
+        sb_app_repository_username: "{{maven_user}}"
+        sb_app_repository_password: "{{maven_password}}"
+        sb_local_maven_artifact_dowload: false
+
+        # environment variables (override those written in the application-prod.yml)
+        sb_app_env:
+          - name: LOGGING_PATH
+            value: "{{ sb_applications_root_folder }}/{{ sb_app_name | upper }}/logs"
+
+        # runs healthchecks for 2 mins to check if the deploy has succeeded
+        sb_app_stop_wait_time: 120        
+
+        # heathceck configurations 
+        sb_app_healthcheck_urls:
+          - "http://localhost:8080/management/health"
+        sb_app_healthcheck_ports:
+          - 8080
+        
+        
+          

@@ -1,0 +1,3 @@
+- src: https://github.com/orachide/ansible-role-springboot
+  version: 1.4.0
+  name: orachide.springboot-service

@@ -1,0 +1,6 @@
+# Variables of the <%= deployEnv %> environment of application <%= appName %>
+---
+<%= snakeCaseAppName %>:
+<% inventoryVars.forEach(function(inventoryVar){ %>
+    <%- inventoryVar %>
+<% }); %>

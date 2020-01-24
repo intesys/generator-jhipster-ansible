@@ -1,0 +1,159 @@
+logging:
+    level: DEBUG
+    config: "{{ sb_applications_root_folder }}/{{ sb_app_name | upper }}/logback-spring.xml"
+    file: "{{ sb_applications_root_folder }}/{{ sb_app_name | upper }}/logs/alfalaval-plair-staging.log"
+    pattern:
+        file: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX, UTC} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n"
+
+spring:
+    devtools:
+        restart:
+            enabled: false
+        livereload:
+            enabled: false
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: "{{spring.datasource.url}}"
+        username: "{{spring.datasource.username}}"
+        password: "{{spring.datasource.password}}"
+        hikari:
+            auto-commit: false
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+            maximum-pool-size: 20
+    jpa:
+        database-platform: org.hibernate.dialect.SQLServer2012Dialect
+        database: SQL_SERVER
+        show-sql: false
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+
+            hibernate.cache.region.factory_class: it.jhipster.config.CacheFactoryConfiguration
+            hibernate.cache.infinispan.statistics: true
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.infinispan.entity.expiration.lifespan: 3600000
+            hibernate.cache.infinispan.entity.eviction.max_entries: 1000
+
+    liquibase:
+        contexts: app,thermal,mechanical
+    mail:
+        host: localhost
+        port: 25
+        username:
+        password:
+    thymeleaf:
+    data:
+        web:
+            pageable:
+                default-page-size: 150
+
+server:
+    port: 8187
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        min-response-size: 1024
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+    http:
+        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
+        cache: # Used by the CachingHttpHeadersFilter
+            timeToLiveInDays: 1461
+
+    cache: # Cache configuration
+        infinispan:
+            config-file: config/infinispan-config.xml
+            statsEnabled: true
+            local:
+                time-to-live-seconds: 60 # By default objects stay 1 hour (in minutes) in the cache
+                max-entries: 100 # Number of objects in each cache entry
+            distributed:
+                time-to-live-seconds: 60 # By default objects stay 1 hour (in minutes) in the cache
+                max-entries: 100 # Number of objects in each cache entry
+                instance-count: 1
+            replicated:
+                time-to-live-seconds: 60 # By default objects stay 1 hour (in minutes) in the cache
+                max-entries: 100 # Number of objects in each cache entry
+    security:
+        authentication:
+            jwt:
+                # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+                # As this is the PRODUCTION configuration, you MUST change the default key, and store it securely:
+                # - In the JHipster Registry (which includes a Spring Cloud Config server)
+                # - In a separate `application-prod.yml` file, in the same folder as your executable WAR file
+                # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_SECRET` environment variable
+                base64-secret: "{{jhipster.security.base64_secret}}"
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+                token-validity-in-seconds-for-remember-me: 2592000
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: plair@javadev.intesys.it
+        base-url: http://javadev.intesys.it:8099
+    metrics:
+        logs:
+            enabled: False
+            report-frequency: 30
+    logging:
+        logstash:
+            enabled: False
+            host: 192.168.183.6
+            port: 5000
+            queue-size: 512
+    swagger:
+        default-include-pattern: /api/users.*
+    cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        exposed-headers: "Authorization,Link,X-Total-Count,Content-Disposition,Plair-Platform,Plair-Service"
+        allow-credentials: true
+        max-age: 1800
+
+logzio:
+    enabled: False
+    url: https://listener.logz.io:8071
+    token: pqTJUMVlcCfsONBdIxaSQpZDVnWjlIMB
+    type: alfalaval_staging
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+application:
+    plair-environment: staging
+    max-results: 200
+    dll-wrapper:
+       endpoint: "{{application.dll_wrapper.endpoint}}"
+       connection-timeout: 20000
+       read-timeout: 660000
+       version-polling-interval: 300000
+    static-resources:
+        public-resource-path: /resources/public
+        public-directory: /opt/jhipster/alfalaval-plair/staging/resources/public/
+        public-endpoint: http://javadev.intesys.it:8099/resources/public
+        private-resource-path: /resources/private
+        private-directory: /opt/jhipster/alfalaval-plair/staging/resources/private/
+        private-endpoint: http://javadev.intesys.it:8099/resources/private
+    security:
+        registration-whitelist:
+            - ^.*@alfalaval\.com$
+            - ^.*@intesys\.it$
+            - ^.*@luvegroup\.com$
