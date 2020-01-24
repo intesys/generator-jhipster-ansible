@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-ansible",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Jhipster module to generate an Ansible deployment workspace",
   "keywords": [
     "yeoman-generator",
