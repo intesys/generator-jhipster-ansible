@@ -8,20 +8,30 @@
 ansible-galaxy install -r requirements.yml
 ```
 
-3. Set your custom shared configurations in `hosts/shared-vars.yml` and `hosts/shared-secrets.yml`.
+3. Set your custom shared configurations 
 
-4. Set per-environment configurations in `hosts/<env>/group_vars/<my-app>/vars.yml|vault.yml`.
+- `hosts/shared-vars.yml` 
+- `hosts/shared-secrets.yml`
 
-4. Encrypt your secret variables and commit your changes
+4. Set per-environment configurations in 
+
+- `hosts/<env>/group_vars/<my-app>/vars.yml`
+- `hosts/<env>/group_vars/<my-app>/vault.yml`
+
+5. Write the list of hosts/servers for each environment
+
+- `hosts/<env>/inventory`
+
+6. Encrypt your secret variables and commit your changes
 
 ```
 ansible-vault encrypt hosts/shared-secrets.yml hosts/<env>*/group_vars/<my-app>*/vault.yml
 ```
 
-5. Deploy
+7. Deploy
 
 ```
-ansible-playbook -u <myuser> -i hosts/<env> my-app-playbook.yml --ask-vault
+ansible-playbook -u <my-ssh-user> -i hosts/<env> my-app-playbook.yml --ask-vault
 ```
 
 ### Install Ansible
