@@ -19,6 +19,7 @@
         sb_app_name: <%= appName %>
         sb_applications_root_folder: /opt/jhipster/<%= appName %>
         sb_app_config_file_template_path: "{{ playbook_dir }}/templates/<%= appName %>/application-prod.yml.j2"
+        sb_app_config_file_final_name: "application-prod.yml"
         sb_app_logback_file_template_path: "{{ playbook_dir }}/templates/<%= appName %>/logback-spring.xml.j2"
         
         # java configs
