@@ -151,8 +151,8 @@ module.exports = class extends BaseGenerator {
             const propValue = _.get(prodConfig, property);
             if (propValue) {
                 const ansiblePropKey = property.replace(/\./g, '_').replace(/-/g, '_');
-                this.inventoryVars.push(`${ansiblePropKey}: "{{${this.snakeCaseAppName}.vault_${ansiblePropKey}}}"`);
-                this.inventoryVaults.push(`vault_${ansiblePropKey}: ${propValue}`);
+                this.inventoryVars.push(`${ansiblePropKey}: "{{vault.${this.snakeCaseAppName}.${ansiblePropKey}}}"`);
+                this.inventoryVaults.push(`${ansiblePropKey}: ${propValue}`);
                 _.set(prodConfig, property, `{{${this.snakeCaseAppName}.${ansiblePropKey}}}`);
             }
         });

@@ -74,19 +74,20 @@ describe('JHipster generator ansible', () => {
             assert.fileContent('ansible/hosts/prod/group_vars/sample-ansible/vars.yml', 'spring_datasource_username: root');
             assert.fileContent(
                 'ansible/hosts/prod/group_vars/sample-ansible/vars.yml',
-                'password: "{{sample_ansible.vault_spring_datasource_password}}"'
+                'password: "{{vault.sample_ansible.spring_datasource_password}}"'
             );
             assert.fileContent(
                 'ansible/hosts/prod/group_vars/sample-ansible/vars.yml',
-                'base64_secret: "{{sample_ansible.vault_jhipster_security_authentication_jwt_base64_secret}}"'
+                'base64_secret: "{{vault.sample_ansible.jhipster_security_authentication_jwt_base64_secret}}"'
             );
         });
         it('populates vault.yml file from the current application-prod.yml file', () => {
             assert.fileContent('ansible/hosts/prod/group_vars/sample-ansible/vars.yml', 'sample_ansible:');
-            assert.fileContent('ansible/hosts/prod/group_vars/sample-ansible/vault.yml', 'vault_spring_datasource_password: rootpassword');
+            assert.fileContent('ansible/hosts/prod/group_vars/sample-ansible/vault.yml', 'vault:');
+            assert.fileContent('ansible/hosts/prod/group_vars/sample-ansible/vault.yml', 'spring_datasource_password: rootpassword');
             assert.fileContent(
                 'ansible/hosts/prod/group_vars/sample-ansible/vault.yml',
-                'vault_jhipster_security_authentication_jwt_base64_secret: my-base-64-secret'
+                'jhipster_security_authentication_jwt_base64_secret: my-base-64-secret'
             );
         });
     });
