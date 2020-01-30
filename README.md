@@ -8,7 +8,7 @@
 
 This is a [JHipster](https://www.jhipster.tech/) module, that is meant to be used in a JHipster application.
 
-This module will generate all the files to deploy you Jhipster jar in your multi stage environment via Ansible.
+This module will generate all the files to deploy you Jhipster executable jar in your multi stage environment via Ansible.
 
 # Prerequisites
 
