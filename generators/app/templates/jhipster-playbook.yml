@@ -7,7 +7,7 @@
     - hosts/shared-vars.yml
 
   roles:
-    - role: orachide.springboot-service
+    - role: intesys.springboot-service
       vars:
         # server config (user and directories)
         sb_app_as_a_service: true
