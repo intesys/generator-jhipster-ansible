@@ -1,5 +1,5 @@
-<%= appName %>_node1 ansible_host = <%= appName %>-<%= deployEnv %>1.mycompany.org <%_ if (sshUser) { _%> ansible_user = <%= sshUser %><%_ } _%>
-<%= appName %>_node2 ansible_host = <%= appName %>-<%= deployEnv %>2.mycompany.org <%_ if (sshUser) { _%> ansible_user = <%= sshUser %><%_ } _%>
+<%= appName %>_node1 ansible_host = <%= appName %>-<%= deployEnv %>1.mycompany.org <%- if (sshUser) { _%> ansible_user = <%= sshUser %><%_ } _%>
+<%= appName %>_node2 ansible_host = <%= appName %>-<%= deployEnv %>2.mycompany.org <%- if (sshUser) { _%> ansible_user = <%= sshUser %><%_ } _%>
 
 [<%= appName %>]
 <%= appName %>_node1
