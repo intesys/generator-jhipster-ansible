@@ -26,7 +26,6 @@ describe('JHipster generator ansible', () => {
 
         it('creates ansible base files', () => {
             assert.file([
-                'ansible/ansible.cfg',
                 'ansible/.gitignore',
                 'ansible/sample-ansible-playbook.yml',
                 'ansible/hosts/shared-vars.yml',
@@ -48,8 +47,8 @@ describe('JHipster generator ansible', () => {
                 'ansible/hosts/prod/group_vars/sample-ansible/vault.yml'
             ]);
         });
-        it('inserts ssh user in ansible.cfg files', () => {
-            assert.fileContent('ansible/ansible.cfg', 'remote_user = jhipster');
+        it('inserts ssh user in inventory files', () => {
+            assert.fileContent('ansible/hosts/test/inventory', ' ansible_user = jhipster');
         });
         it('uses ansible variables in application-prod.yml.j2 template', () => {
             assert.fileContent('ansible/templates/sample-ansible/application-prod.yml.j2', '{{sample_ansible.spring_datasource_url}}');

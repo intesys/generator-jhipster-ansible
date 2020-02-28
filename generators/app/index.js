@@ -115,12 +115,10 @@ module.exports = class extends BaseGenerator {
         this.sshUser = this.promptAnswers.sshUser;
 
         this.template('README.md', `${this.ansibleWorkspacePath}/README.md`);
-        this.template('ansible.cfg', `${this.ansibleWorkspacePath}/ansible.cfg`);
         this.template('jhipster-playbook.yml', `${this.ansibleWorkspacePath}/${this.appName}-playbook.yml`);
         this.template('hosts/shared-secrets.yml', `${this.ansibleWorkspacePath}/hosts/shared-secrets.yml`);
         this.template('hosts/shared-vars.yml', `${this.ansibleWorkspacePath}/hosts/shared-vars.yml`);
         this.template('requirements.yml', `${this.ansibleWorkspacePath}/requirements.yml`);
-        this.template('ansible.cfg', `${this.ansibleWorkspacePath}/ansible.cfg`);
         this.copy('gitignore-tpl', `${this.ansibleWorkspacePath}/.gitignore`);
         this.template(
             'ansible-templates/logback-spring.xml.j2',
