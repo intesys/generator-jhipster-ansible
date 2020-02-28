@@ -2,5 +2,5 @@
 ---
 <%= snakeCaseAppName %>:
 <% inventoryVars.forEach(function(inventoryVar){ %>
-    <%- inventoryVar %>
+    <%- inventoryVar -%>
 <% }); %>

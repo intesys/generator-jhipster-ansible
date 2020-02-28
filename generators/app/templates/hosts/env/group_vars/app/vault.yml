@@ -3,5 +3,5 @@
 vault:
     <%= snakeCaseAppName %>:
 <% inventoryVaults.forEach(function(inventoryVault){ %>
-        <%- inventoryVault %>
+        <%- inventoryVault -%>
 <% }); %>
